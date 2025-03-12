@@ -1,0 +1,74 @@
+{
+  "result" : {
+    "message" : "success",
+    "code" : 0
+  },
+  "data" : {
+    "asset_list" : [
+      {
+        "security_symbol" : "TEST1",
+        "type" : "stock",
+        "security_description" : "테스트를 위한 종목1",
+        "quantity" : 1,
+        "ratio":10.05,
+        "security_name" : "test security 1"
+      },
+      {
+        "security_symbol" : "TEST2",
+        "type" : "stock",
+        "description" : "테스트를 위한 종목1",
+        "quantity" : 1,
+        "ratio":8.03,
+        "security_name" : "test security 2"
+      },
+      {
+        "security_name" : "test security 3",
+        "type" : "stock",
+        "security_symbol" : "TEST3",
+        "quantity" : 1,
+        "ratio":6.5,
+        "security_description" : "테스트를 위한 종목3"
+      },
+      {
+        "quantity" : 1,
+        "type" : "stock",
+        "security_name" : "test security 4",
+        "ratio":8.5,
+        "security_description" : "테스트를 위한 종목4",
+        "security_symbol" : "TEST4"
+      },
+      {
+        "security_description" : "테스트를 위한 종목5",
+        "security_name" : "test security 5",
+        "type" : "bond",
+        "ratio":9.5,
+        "security_symbol" : "TEST5",
+        "quantity" : 3
+      },
+      {
+        "security_symbol" : "TEST6",
+        "type":"bond",
+        "quantity" : 1,
+        "ratio":8.5,
+        "security_name" : "test security 6",
+        "security_description" : "테스트를 위한 종목6"
+      },
+      {
+        "security_symbol" : "TEST7",
+        "type":"bond",
+        "quantity" : 1,
+        "ratio":13.42,
+        "security_name" : "test security 7",
+        "security_description" : "테스트를 위한 종목7"
+      },
+      {
+        "security_symbol" : "usd_cash",
+        "type":"etc",
+        "quantity" : 1,
+        "security_name" : "cash",
+        "ratio":35.5,
+        "security_description" : "현금"
+      }
+    ]
+  }
+}
