@@ -34,7 +34,7 @@ class AssetAllocationScreen extends ConsumerWidget {
                   children: [
                     Text(
                       "장기투자에 적합한\n적극적인 자산배분",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                     ),
                     SizedBox(height: 24),
                     Text.rich(
@@ -42,11 +42,11 @@ class AssetAllocationScreen extends ConsumerWidget {
                         children: [
                           TextSpan(
                             text: "'평생안정 은퇴자금'",
-                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
                           ),
                           TextSpan(
                             text: "에\n최적화된 자산배분입니다.",
-                            style: TextStyle(color: Colors.white70),
+                            style: TextStyle(color: Colors.white70, fontSize: 12),
                           ),
                         ],
                       ),
@@ -76,13 +76,13 @@ class AssetAllocationScreen extends ConsumerWidget {
   Widget _buildPieChart(BuildContext context, AsyncValue<List<AssetData>> assetListAsync, WidgetRef ref) {
     return assetListAsync.when(
       data: (assetList) => SizedBox(
-        width: 200,
-        height: 200,
+        width: 100,
+        height: 100,
         child: PieChart(
           PieChartData(
             startDegreeOffset: -90,
             sectionsSpace: 1,
-            centerSpaceRadius: 40,
+            centerSpaceRadius: 20,
             sections: assetList.asMap().entries.map((entry) {
               final index = entry.key;
               final asset = entry.value;
@@ -91,7 +91,7 @@ class AssetAllocationScreen extends ConsumerWidget {
               return PieChartSectionData(
                 color: _getAssetColor(asset.type),
                 value: asset.ratio,
-                radius: isSelected ? 60 : 50,
+                radius: isSelected ? 50 : 40,
                 title: "",
               );
             }).toList(),
@@ -182,7 +182,7 @@ class AssetAllocationScreen extends ConsumerWidget {
           title,
           style: TextStyle(
             color: Colors.white70,
-            fontSize: 12,
+            fontSize: 11,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -201,7 +201,10 @@ class AssetAllocationScreen extends ConsumerWidget {
           width: 120,
           child: Text(
             asset.securityName,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(
+                color: Colors.white,
+                fontSize: 13
+            ),
           ),
         ),
         SizedBox(width: 24),
@@ -219,7 +222,10 @@ class AssetAllocationScreen extends ConsumerWidget {
             alignment: Alignment.centerRight,
             child: Text(
               "${asset.ratio.toStringAsFixed(2)}%",
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 13
+              ),
             ),
           ),
         ),

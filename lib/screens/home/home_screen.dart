@@ -85,6 +85,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
           height: 12,
         ),
         centerTitle: false,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout, color: Colors.black),
+            onPressed: _logout,
+          ),
+        ],
       ),
       drawer: _buildDrawer(),
       body: Column(
@@ -117,7 +123,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
             alignment: Alignment.bottomLeft,
             child: const Text(
               "AIM에 오신 것을\n환영합니다.",
-              style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
           Expanded(
@@ -171,14 +177,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
                                   Text(
                                     "간편결제",
                                     style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold
+                                        fontWeight: FontWeight.w600
                                     ),
                                   ),
                                   Text(
                                     "한 번 등록으로 간편하게 이체",
                                     style: TextStyle(
-                                        fontSize: 12,
+                                        fontSize: 11,
                                         color: Colors.black54
                                     ),
                                   )
@@ -200,12 +205,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
                             "연동하기",
                             style: TextStyle(
                               color: Colors.black,
-                              fontSize: 12,
+                              fontSize: 11,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            fixedSize: Size(double.maxFinite, 48),
+                            fixedSize: Size(double.maxFinite, 40),
                             backgroundColor: Colors.black.withOpacity(0.05),
                             elevation: 0,
                             padding: const EdgeInsets.symmetric(vertical: 12),
@@ -219,17 +224,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
                   ),
                   ListTile(
                     leading: const Icon(Icons.assignment_turned_in_outlined),
-                    title: const Text("AIM 가이드라인"),
+                    title: const Text("AIM 가이드라인", style: TextStyle(fontSize: 13),),
                     onTap: _showComingSoon,
                   ),
                   ListTile(
                     leading: const Icon(Icons.description_outlined),
-                    title: const Text("AIM 이용방법"),
+                    title: const Text("AIM 이용방법", style: TextStyle(fontSize: 13),),
                     onTap: _showComingSoon,
                   ),
                   ListTile(
                     leading: const Icon(Icons.emoji_events_outlined),
-                    title: const Text("AIM Score"),
+                    title: const Text("AIM Score", style: TextStyle(fontSize: 13),),
                     trailing: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
@@ -246,12 +251,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
                   ),
                   ListTile(
                     leading: const Icon(Icons.quiz_outlined),
-                    title: const Text("Q&A"),
+                    title: const Text("Q&A", style: TextStyle(fontSize: 13),),
                     onTap: _showComingSoon,
                   ),
                   ListTile(
                     leading: const Icon(Icons.chat_outlined),
-                    title: const Text("HELP"),
+                    title: const Text("HELP", style: TextStyle(fontSize: 13),),
                     onTap: _showComingSoon,
                   ),
                   Divider(
@@ -260,12 +265,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
                   ),
                   ListTile(
                     leading: const Icon(Icons.bar_chart_outlined),
-                    title: const Text("수익 현황"),
+                    title: const Text("수익 현황", style: TextStyle(fontSize: 13),),
                     onTap: _showComingSoon,
                   ),
                   ListTile(
                     leading: const Icon(Icons.list_outlined),
-                    title: const Text("계약 내역"),
+                    title: const Text("계약 내역", style: TextStyle(fontSize: 13),),
                     onTap: _showComingSoon,
                   ),
                   Divider(
@@ -274,7 +279,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
                   ),
                   ListTile(
                     leading: const Icon(Icons.settings),
-                    title: const Text("설정"),
+                    title: const Text("설정", style: TextStyle(fontSize: 13),),
                     onTap: _showComingSoon,
                   ),
                 ],

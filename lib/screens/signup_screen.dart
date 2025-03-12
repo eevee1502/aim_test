@@ -27,11 +27,19 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> with TickerProvider
 
   bool _termsChecked = false;
   bool _privacyChecked = false;
+  int currentStep = 0;
 
   @override
   void initState() {
     super.initState();
     _pages = [_buildIdStep()];
+    // _pages = [
+    //   _buildAgreementStep(),
+    //   _buildEmailStep(),
+    //   _buildPhoneNumberStep(),
+    //   _buildPasswordStep(),
+    //   _buildIdStep(),
+    // ];
     _controller = AnimationController(
       duration: const Duration(milliseconds:300),
       vsync: this,
@@ -40,14 +48,17 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> with TickerProvider
 
   void _nextStep() {
     if (_formKey.currentState?.saveAndValidate() ?? false) {
+      print("before current_step:$currentStep");
       setState(() {
         Widget nextStepWidget = _getNextStepWidget();
         if (nextStepWidget != Container()) {
           _pages.insert(0, nextStepWidget);
+          currentStep++;
         }
       });
       _controller.forward(from: 0);
     }
+    print("after current_step:$currentStep");
   }
 
   Widget _getNextStepWidget() {
@@ -131,6 +142,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> with TickerProvider
           return null;
         },
       ),
+      0
     );
   }
 
@@ -169,6 +181,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> with TickerProvider
           ),
         ],
       ),
+      1
     );
   }
 
@@ -188,6 +201,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> with TickerProvider
           return null;
         },
       ),
+      2
     );
   }
 
@@ -212,6 +226,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> with TickerProvider
           return null;
         },
       ),
+      3
     );
   }
 
@@ -274,6 +289,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> with TickerProvider
           ),
         ],
       ),
+      4
     );
   }
 
@@ -282,7 +298,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> with TickerProvider
       name: name,
       builder: (FormFieldState<bool> field) {
         return Container(
-          padding: EdgeInsets.symmetric(vertical:8),
           child: Row(
             children: [
               Checkbox(
@@ -303,7 +318,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> with TickerProvider
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(text),
+                      Text(text, style: TextStyle(fontSize: 12),),
                       const Icon(Icons.chevron_right, color: Colors.grey),
                     ],
                   ),
@@ -328,24 +343,29 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> with TickerProvider
   }
 
   void _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
+    Uri _uri = Uri.parse(url);
+    if (await canLaunchUrl(_uri)) {
+      await launchUrl(_uri);
     } else {
       throw "Could not launch $url";
     }
   }
 
-  Widget _buildStep(String title, Widget child) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 10),
-            child,
-          ]
-      ),
+  Widget _buildStep(String title, Widget child, int stepIndex) {
+    return StatefulBuilder(
+        builder: (context, setState) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (currentStep == stepIndex)
+                  Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                child,
+              ],
+            ),
+          );
+        }
     );
   }
 
@@ -360,7 +380,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> with TickerProvider
       focusedBorder: UnderlineInputBorder(
         borderSide: BorderSide(color: AimColors.primary, width: 2),
       ),
-      label: Text(label),
+      label: Text(label, style: TextStyle(fontSize: 12)),
       hintText: hint,
     );
   }
