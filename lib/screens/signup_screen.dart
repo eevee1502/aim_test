@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../core/services/local_storage_service.dart';
 import '../core/theme/aim_color.dart';
-import 'home_screen.dart';
+import 'home/home_screen.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fl_chart/fl_chart.dart';
-import '../core/theme/aim_color.dart';
-import '../core/models/asset_data.dart';
-import '../core/providers/asset_provider.dart';
+
+import '../../../core/models/asset_data.dart';
+import '../../../core/providers/asset_provider.dart';
+import '../../../core/theme/aim_color.dart';
+import 'asset_detail_screen.dart';
 
 class AssetAllocationScreen extends ConsumerWidget {
-  const AssetAllocationScreen({super.key});
+  AssetAllocationScreen({super.key});
+  final selectedIndexProvider = StateProvider<int?>((ref) => null);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,7 +27,7 @@ class AssetAllocationScreen extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _buildPieChart(assetListAsync),
+                _buildPieChart(context, assetListAsync, ref),
                 const SizedBox(width: 32),
                 const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +73,7 @@ class AssetAllocationScreen extends ConsumerWidget {
     }
   }
 
-  Widget _buildPieChart(AsyncValue<List<AssetData>> assetListAsync) {
+  Widget _buildPieChart(BuildContext context, AsyncValue<List<AssetData>> assetListAsync, WidgetRef ref) {
     return assetListAsync.when(
       data: (assetList) => SizedBox(
         width: 200,
@@ -80,12 +83,44 @@ class AssetAllocationScreen extends ConsumerWidget {
             startDegreeOffset: -90,
             sectionsSpace: 1,
             centerSpaceRadius: 40,
-            sections: assetList.map((e) => PieChartSectionData(
-                color: _getAssetColor(e.type),
-                value: e.ratio,
-                radius: 50,
-                title: ""
-            )).toList(),
+            sections: assetList.asMap().entries.map((entry) {
+              final index = entry.key;
+              final asset = entry.value;
+              final isSelected = index == ref.watch(selectedIndexProvider);
+
+              return PieChartSectionData(
+                color: _getAssetColor(asset.type),
+                value: asset.ratio,
+                radius: isSelected ? 60 : 50,
+                title: "",
+              );
+            }).toList(),
+            pieTouchData: PieTouchData(
+              touchCallback: (FlTouchEvent event, PieTouchResponse? pieTouchResponse) {
+                final selectedIndex = ref.read(selectedIndexProvider.notifier);
+
+                if (event is FlTapUpEvent && pieTouchResponse?.touchedSection != null) {
+                  final touchedIndex = pieTouchResponse!.touchedSection!.touchedSectionIndex;
+
+                  if (touchedIndex >= 0 && touchedIndex < assetList.length) {
+                    final selectedAsset = assetList[touchedIndex];
+
+                    selectedIndex.state = touchedIndex;
+
+                    Future.delayed(Duration(milliseconds: 100), () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AssetDetailScreen(asset: selectedAsset),
+                        ),
+                      ).then((_) {
+                        selectedIndex.state = null;
+                      });
+                    });
+                  }
+                }
+              },
+            ),
           ),
         ),
       ),

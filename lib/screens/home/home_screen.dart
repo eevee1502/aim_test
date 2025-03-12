@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../core/services/local_storage_service.dart';
-import '../core/theme/aim_color.dart';
-import 'asset_allocation_screen.dart';
+import '../../core/services/local_storage_service.dart';
+import '../../core/theme/aim_color.dart';
+import 'assets/asset_allocation_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -96,7 +96,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
               children: [
                 _buildEmptyPage("MY AIM"),
                 _buildEmptyPage("자산추이"),
-                const AssetAllocationScreen(),
+                AssetAllocationScreen(),
               ],
             ),
           ),
@@ -200,12 +200,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
                             "연동하기",
                             style: TextStyle(
                               color: Colors.black,
-                              fontSize: 14,
+                              fontSize: 12,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            fixedSize: Size(double.maxFinite, 32),
+                            fixedSize: Size(double.maxFinite, 48),
                             backgroundColor: Colors.black.withOpacity(0.05),
                             elevation: 0,
                             padding: const EdgeInsets.symmetric(vertical: 12),
