@@ -41,10 +41,16 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     final String? userId = await localStorage.getData("user_id");
 
     if (mounted) {
+      // Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => (userId != null && userId.isNotEmpty) ? const HomeScreen() : const SignUpScreen(),
+      //   ),
+      // );
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => (userId != null && userId.isNotEmpty) ? const HomeScreen() : const SignUpScreen(),
+          builder: (context) => const HomeScreen()
         ),
       );
     }

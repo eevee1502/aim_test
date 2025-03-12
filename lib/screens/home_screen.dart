@@ -96,7 +96,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
               children: [
                 _buildEmptyPage("MY AIM"),
                 _buildEmptyPage("자산추이"),
-                const AssetAllocationScreen(), // 별도 화면으로 이동
+                const AssetAllocationScreen(),
               ],
             ),
           ),
@@ -129,7 +129,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
                     padding: EdgeInsets.symmetric(horizontal:16),
                     child: ElevatedButton.icon(
                       onPressed: () {},
-                      icon: const Icon(Icons.add_circle_outline, color: Colors.black, size: 18), // "+" 아이콘
+                      icon: const Icon(Icons.add_circle_outline, color: Colors.black, size: 18),
                       label: const Text(
                         "추가계약",
                         style: TextStyle(
@@ -195,7 +195,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
                         const SizedBox(height: 8),
                         ElevatedButton.icon(
                           onPressed: () {},
-                          icon: const Icon(Icons.add, color: Colors.black, size: 18), // "+" 아이콘
+                          icon: const Icon(Icons.add, color: Colors.black, size: 18),
                           label: const Text(
                             "연동하기",
                             style: TextStyle(
