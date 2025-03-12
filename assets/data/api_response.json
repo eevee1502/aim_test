@@ -16,7 +16,7 @@
       {
         "security_symbol" : "TEST2",
         "type" : "stock",
-        "description" : "테스트를 위한 종목1",
+        "security_description" : "테스트를 위한 종목2",
         "quantity" : 1,
         "ratio":8.03,
         "security_name" : "test security 2"

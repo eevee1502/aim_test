@@ -27,8 +27,32 @@ class AssetAllocationScreen extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _buildPieChart(context, assetListAsync, ref),
-                const SizedBox(width: 32),
+                Column(
+                  children: [
+                    _buildPieChart(context, assetListAsync, ref),
+                    const SizedBox(height:12),
+                    ActionChip(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AssetDetailScreen(securityName: "all"),
+                          ),
+                        );
+                      },
+                      backgroundColor: Colors.black87,
+                      labelPadding: EdgeInsets.zero,
+                      padding: EdgeInsets.symmetric(horizontal: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        side: const BorderSide(color: Colors.white, width: 1.5),
+                      ),
+                      label: const Text("전체보기", style: TextStyle(color: Colors.white, fontSize: 10)),
+                    ),
+                    const Text("차트를 클릭하시면\n개별내역을 볼 수 있습니다.",textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 8)),
+                  ],
+                ),
+                const SizedBox(width: 48),
                 const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -111,7 +135,7 @@ class AssetAllocationScreen extends ConsumerWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => AssetDetailScreen(asset: selectedAsset),
+                          builder: (context) => AssetDetailScreen(securityName: selectedAsset.securityName),
                         ),
                       ).then((_) {
                         selectedIndex.state = null;
