@@ -1,16 +1,23 @@
-# aim_test
+# AIM Test App
 
-AIM Coding Test Flutter project.
+AIM Coding Test Project입니다.
 
-## Getting Started
+## 📌 개발 환경
+- **운영체제**: Windows
+- **개발툴**: IntelliJ IDEA 2021.2.3
+- **Flutter 버전**: 3.27.3
+- **Dart 버전**: 3.6.1
 
-This project is a starting point for a Flutter application.
+### 주요 기능
+- 회원가입 및 로그인 (`id`, `password`, `휴대폰 번호`, `이메일` validation 포함)
+- 로그인정보 저장
+- 자산 배분 화면 (`Pie Chart` 라이브러리는 fl_chart 사용)
+- 자산 비율 상세보기 (포트폴리오 목록)
+- 특정 자산 클릭 시 해당 주식/채권 목록 상세보기
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📌 사용 된 라이브러리
+- **State Management**: `flutter_riverpod`
+- **Networking**: `dio`
+- **Storage**: `encrypted_shared_preferences`
+- **UI Components**: `fl_chart` (파이 차트)
+- **Form Validation**: `flutter_form_builder`
